@@ -2,6 +2,7 @@ var arrEmployees;
 $.getJSON("https://www.swollenhippo.com/getEmployeesByAPIKey.php?APIKey=Mickey2021!", function(result){
     console.log(result);
     arrEmployees = result;
+    buildEmployeeCard();
     $.each(result,function(i,person){
         console.log(person.FirstName);
         console.log(person.FirstName + ' ' + person.LastName);
@@ -10,18 +11,24 @@ $.getJSON("https://www.swollenhippo.com/getEmployeesByAPIKey.php?APIKey=Mickey20
 })
 
 function buildEmployeeCard(){
-    let strHTML= '<div class="card mt-5 col-6 offset-3">';
-    strHTML += '<h3 class="text-center mt-3"><a href="mailto:nwbolin42@tntech.edu">' + person.FirstName + person.LastName +'</a> </h3>';
-    strHTML += '<h4 class="text-center">'+ person.Postion + '</h4>';
-    strHTML += '<h4 class="mt-3">Profile Details</h4>';
-    strHTML += ' <p>Hourly Rate:' + person.HourlyRate + '</p>';
-    strHTML += ' <p>Address: 321 Peach Tree Lane, Cookeville, TN 38501</p>';
-    strHTML += '<p>Assignment: Johnson Hall</p>';
-    strHTML += '<div class="form-group">';
-    strHTML += '    <label for="txtPayRate">Pay Rate</label>';
-    strHTML += '    <input id="txtPayRate">';
-    strHTML += ' </div>';
-    $('body').append(strHTML);
+    $.each(arrEmployees,function(i,person){
+        if(person.FirstName != 'John'){
+            let strHTML = '<div class="card col-6 offset-3 mt-5">';
+            strHTML += '<h3 class="text-center"><a href="mailto:' + person.Email + '">' + person.FirstName + ' ' + person.LastName + '</a></h3>';
+            strHTML += '<h4 class="text-center">' + person.Postion +'</h4>';
+            strHTML += '<h4 class="mt-3">Profile Details</h4>';
+            strHTML += '<p>Hourly Rate: ' + person.HourlyRate + '</p>';
+            strHTML += '<p>Address:  586 Southern Lane, Cookeville, TN 38506</p>';
+            strHTML += '<p>Assignment:  Clement Hall</p>';
+            strHTML += '<div class="form-group">';
+            strHTML += '<label for="txtPayRate">Pay Rate</label>';
+            strHTML += '<input id="txtPayRate">';
+            strHTML += '</div>';
+            strHTML += '</div>';
+            $('body').append(strHTML);
+        }
+        
+    });
 }
 
 $('#btnTest').click(function() {
@@ -30,11 +37,12 @@ $('#btnTest').click(function() {
     let decRate = $('#txtPayRate').val();
     console.log(decHours * decRate);
 });
-$('#txtPayRate').change(function(){
+$('#cboEmployeeType').change(function() {
     if($('#cboEmployeeType').val() == 'FULL'){
         //$('#divHours').slideUp();
-        // $('#divHours').css('display','none');
-         $('#divHours').addClass('d-none');
-    }else{
-        $('#divHours').slideDown();
+        //$('#divHours').css('display','none');
+        $('#divHours').addClass('d-none');
+    }else {
+        $('#divHours').removeClass('d-none').slideDown();
     }
+})
