@@ -3,35 +3,45 @@ $.getJSON("https://www.swollenhippo.com/getEmployeesByAPIKey.php?APIKey=Mickey20
     console.log(result);
     arrEmployees = result;
     buildEmployeeCard();
-    $.each(result,function(i,person){
-        console.log(person.FirstName);
-        console.log(person.FirstName + ' ' + person.LastName);
-        $('#txtEmail').val(person.Email);
-    })
+
 })
 
 function buildEmployeeCard(){
     $.each(arrEmployees,function(i,person){
-            let strHTML = '<div class="card col-3 ml-4 mt-5">';
+        if(person.FirstName != 'John'){
+            let strHTML = '<div class="card col-3 mt-5 ml-3">';
+            strHTML += '<img src="images/profile.png" alt="Profile Image" style="margin:auto; max-width:100%;">';
             strHTML += '<h3 class="text-center"><a href="mailto:' + person.Email + '">' + person.FirstName + ' ' + person.LastName + '</a></h3>';
             strHTML += '<h4 class="text-center">' + person.Postion +'</h4>';
             strHTML += '<h4 class="mt-3">Profile Details</h4>';
-            strHTML += '<h5 class="HourlyRate"> Hourly Rate:' + person.HourlyRate + '</h5>';
-            strHTML += '<p>Email: '+ person.Email +'</p>';
-            strHTML += '<p>Date Hired:  ' + person.HireDate +'</p>';
-            strHTML += '<div class="form-group">';
-            strHTML += '<label class="txtHours">Hours Worked</label>';
+            strHTML += '<p>Hire Date: ' + person.HireDate + '</p>';
+            strHTML += '<p class="txtHourlyRate" data-rate="' + person.HourlyRate + '">Hourly Rate: ' + person.HourlyRate + '</p>';
+            strHTML += '<h4 class="mt-3">Pay Calculations</h4>';
+            strHTML += '<div class="form-group mb-0">';
+            strHTML += '<label class="mr-2">Hours Worked</label>';
             strHTML += '<input class="txtHours">';
-            strHTML += '<label class="txtPayCheck">Total</label>';
-            strHTML += '<input class="txtPayCheck" placeholder="Hours worked * Pay rate" disabled="">'
-            strHTML += '<button class="btn btn-primary btn-block btnCalculate">Calculate</button>'
+            strHTML += '</div>';
+            strHTML += '<div class="form-group">';
+            strHTML += '<label class="mr-2">Total Pay</label>';
+            strHTML += '<input class="txtTotalPay" disabled>';
+            strHTML += '<button class="btn btn-primary btn-block btnCalculatePay">Calculate Pay</button>'
             strHTML += '</div>';
             strHTML += '</div>';
             $('#divEmployeeCards').append(strHTML);
-        
+            $('#tblEmployees tbody').append('<tr><td>' + person.FirstName + '</td><td>' + person.LastName + '</td></tr>');
+        }
         
     });
+    $('#tblEmployees').DataTable();
 }
+
+
+$(document).on('click','.btnCalculatePay',function() {
+    let decHours = $(this).closest('.card').find('.txtHours').val();
+    let decRate = $(this).closest('.card').find('.txtHourlyRate').val().split(': ')[1];
+    // let decRate = $(this).closest('.card').find('.txtHourlyRate').attr('data-rate');
+    $(this).closest('.card').find('.txtTotalPay').val(decHours * decRate);
+});
 
 
 
