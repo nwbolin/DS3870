@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/lib/materia.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
+
+</head>
+<body>
+    <div>
+        <h3 class="text-center">Nostalgia Enterprises</h3>
+        <div class="card mt-3 col-6 offset-3">
+            <h1 class="text-center mt-3"> Welcome </h1>
+            <h4 class="mt-2 text-center"> Welcome to the employee directory. Please press the "Change View" button if you wish to see the table or card form.</h4>
+
+        </div>
+        <button class="btn btn-lg btn-warning mt-3 mb-3 col-6 offset-3" id="btnChangeView"> Change View </button>
+    </div>
+    <div id="divEmployeeCards" class="row col-12">
+    </div>
+    <div class="card mt-3 col-10 ml-3 mr-3 mb-3 offset-1">
+        <table class="table" id="tblEmployees">
+            <thead><th>First Name</th><th>Last Name</th><th>Position</th><th>Total Pay</th></thead>
+            <tbody>
+               
+            </tbody>
+        </table>
+        </div>
+    </body>
+</html>
+<script src="js/lib/jquery-3.6.0.min.js"></script>
+<script src="js/lib/bootstrap.bundle.min.js"></script>
+<script src="js/lib/app.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>

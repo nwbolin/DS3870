@@ -1,0 +1,8 @@
+body{
+    background-image: url("../images/background.jpeg");
+    overflow-x: scroll;
+}
+div.scrollmenu{
+    overflow: auto;
+    display: inline-block;
+}
