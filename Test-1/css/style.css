@@ -1,0 +1,9 @@
+body {
+    background-image: url(../images/background.jpeg);
+}
+.card{
+    flex-direction: row;
+    }
+.divAgentCards{
+    text-overflow: clip;
+}
