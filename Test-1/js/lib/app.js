@@ -43,7 +43,7 @@ $.getJSON("https://www.swollenhippo.com/getPayStubsByAPIKey.php?APIKey=DuffManSa
                strHTML = '<h4 class="mt-1">Zip Code: ' + person.Zip +'</h4>';
                strHTML = '<h4 class="mt-2">Emergency Contact: ' + person.Econtact +'</h4>';
                strHTML = '<h4 class="mt-1">Emergency Phone: ' + person.Ephone +'</h4>';
-                $('#divAdditionalInfo').append(person);
+                $('#divAdditionalInfo').append(strHTML);
                 
             }
             

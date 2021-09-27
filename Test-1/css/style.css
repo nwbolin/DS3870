@@ -4,6 +4,3 @@ body {
 .card{
     flex-direction: row;
     }
-.divAgentCards{
-    text-overflow: clip;
-}
